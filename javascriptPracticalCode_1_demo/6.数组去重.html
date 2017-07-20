@@ -11,7 +11,15 @@
 </body>
 <script>
     Array.prototype.deleteRepeat=function(){
-        
+        var result=[],
+            json={};
+            for(var i=0;i<this.length;i++){
+                if(!json[this[i]]){
+                    result.push(this[i]);
+                    json[this[i]]=1;
+                }
+            }
+            return result;
     }
     var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
     console.log(dataArray.deleteRepeat());

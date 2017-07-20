@@ -194,7 +194,24 @@ Array.prototype.deleteRepeat=function(){
 var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
 console.log(dataArray.deleteRepeat());
 ```
-
+#### 6.数组去重（非常棒）
+这段代码的的精华处在于将数组里面每个不同元素作为对象的键，而他们的值都设置为1，这样每次在数组里面抽出一个元素就能去对象里面以键--->值的形式进行查询，如果没有就是undefined,!undefined就是true，就会进入if循环语句中，将这个不重复元素压入result,同时将这个元素放在json里面，作为键，并另其值为1
+```javascript
+Array.prototype.deleteRepeat=function(){
+    var result=[],
+        json={};
+        for(var i=0;i<this.length;i++){
+            //高明之处就在下面这个if里面json处
+            if(!json[this[i]]){
+                result.push(this[i]);
+                json[this[i]]=1;
+            }
+        }
+        return result;
+}
+var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+console.log(dataArray.deleteRepeat());
+```
 #### 禁止表单按回车触发提交事件
 在HTML页里面由于使用了form，常常需要禁用enter提交表单。因为内容页或者母版页自身有如果有type="submit"的button,当textbox聚焦时，按下enter都会触发表单的默认提交（不论是IE还是firefox），于是需要在onkeydown中监听用户的按键。实际测试，IE8中导致表单提交的不确定因素太多，点击表单的table中的td都会触发表单提交，而firefox则不会；于是在ie和ff中禁用表单提交需要不同的思路。
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+function deleteRepeat(ar) {
+    var ret = [];
+
+    ar.forEach(function(e, i, ar) {
+        if (ar.indexOf(e) === i) {
+            ret.push(e);
+        }
+    });
+
+    return ret;
+}
+    var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+    console.log(deleteRepeat(dataArray));
+</script>
+</html>
