@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    Array.prototype.deleteRepeat1=function(){
+        for(var i=0;i<this.length;i++){
+            var n=this[i];
+            this.splice(i,1);
+            if(this.indexOf(n)==-1){
+                this.splice(i,1,n);//不重复就在写进入
+            }
+        }
+        return this;
+    }
+    Array.prototype.deleteRepeat2=function(){
+        for(var i=0;i<this.length;i++){
+            var n=this[i];
+            this.splice(i,1,null);
+            if(this.indexOf(n)>-1){
+                this.splice(i,1);//重复
+            }else{
+                this.splice(i,1,n)//不重复
+            }
+        }
+        return this;
+    }
+    var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+    console.log(dataArray.deleteRepeat1());
+    //返回的都是[2, 1, 3, "cc", "dd"]
+    console.log(dataArray.deleteRepeat2());
+</script>
+</html>

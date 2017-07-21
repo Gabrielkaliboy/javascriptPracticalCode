@@ -212,6 +212,78 @@ Array.prototype.deleteRepeat=function(){
 var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
 console.log(dataArray.deleteRepeat());
 ```
+#### 7.数组去重(简单)
+- 利用数组函数forEach(),他的第一个参数是元素本身，第二个参数是元素所在的位置脚标，第三个元素是元素所在的数组
+
+- 巧用indexOf。数组元素的indexOf属性返回的是元素在数组里面第一次出现的位置，如果当前的元素第一次出现的位置与他所在的脚标不一致，那他就是重复的，相反的，一致就是不重复的
+```javascript
+function deleteRepeat(data){
+    var result=[];
+    data.forEach(function(e,i,arr){
+        if(data.indexOf(e)==i){
+            result.push(e);
+        }
+    });
+    return result;
+}
+var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+console.log(deleteRepeat(dataArray));
+```
+#### 8.数组去重（太复杂了没看懂）
+```javascript
+Array.prototype.deleteRepeat=function(){
+    var a=[],
+        b=[],
+        oa=this.concat();
+    for(var i=1;i<oa.length;i++){
+        for(var j=0;j<i;j++){
+            if(b.indexOf(j)>-1) continue;
+            if(oa[j]==oa[i]){
+                b.push(j);
+            }
+        }
+    }
+    this.splice(0,this.length);
+    for(var i=0;i<oa.length;i++){
+        if(b.indexOf(i)>-1) continue;
+        this.push(oa[i]);
+    }
+    return this;
+}
+var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+console.log(dataArray.deleteRepeat());
+```
+#### 9.数组去重（并不是从左往右依次排列）
+利用slice函数，先把当前脚标i对应的元素存一份，然后利用indexOf再去剩下的里面找，如果等于-1，说明剩下的元素里面没有当前i对应的这个，那就再把它村进去。
+```javascript
+Array.prototype.deleteRepeat1=function(){
+    for(var i=0;i<this.length;i++){
+        var n=this[i];
+        this.splice(i,1);
+        if(this.indexOf(n)==-1){
+            this.splice(i,1,n);//不重复就在写进入
+        }
+    }
+    return this;
+}
+Array.prototype.deleteRepeat2=function(){
+    for(var i=0;i<this.length;i++){
+        var n=this[i];
+        this.splice(i,1,null);
+        if(this.indexOf(n)>-1){
+            this.splice(i,1);//重复
+        }else{
+            this.splice(i,1,n)//不重复
+        }
+    }
+    return this;
+}
+var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+console.log(dataArray.deleteRepeat1());
+//返回的都是[2, 1, 3, "cc", "dd"]
+console.log(dataArray.deleteRepeat2());
+```
+#### 10.数组去重（算法有问题，待改正）
 #### 禁止表单按回车触发提交事件
 在HTML页里面由于使用了form，常常需要禁用enter提交表单。因为内容页或者母版页自身有如果有type="submit"的button,当textbox聚焦时，按下enter都会触发表单的默认提交（不论是IE还是firefox），于是需要在onkeydown中监听用户的按键。实际测试，IE8中导致表单提交的不确定因素太多，点击表单的table中的td都会触发表单提交，而firefox则不会；于是在ie和ff中禁用表单提交需要不同的思路。
 

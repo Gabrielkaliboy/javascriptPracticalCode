@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    Array.prototype.deleteRepeat=function(){
+        var a=[],
+            b=[],
+            oa=this.concat();
+        for(var i=1;i<oa.length;i++){
+            for(var j=0;j<i;j++){
+                if(b.indexOf(j)>-1) continue;
+                if(oa[j]==oa[i]){
+                    b.push(j);
+                }
+            }
+        }
+        this.splice(0,this.length);
+        for(var i=0;i<oa.length;i++){
+            if(b.indexOf(i)>-1) continue;
+            this.push(oa[i]);
+        }
+        return this;
+    }
+    var dataArray=[1,2,3,1,2,3,"dd","cc","dd","cc"];
+    console.log(dataArray.deleteRepeat());
+</script>
+</html>

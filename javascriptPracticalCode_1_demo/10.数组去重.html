@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>此算法有问题，待改正！</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //此算法有问题，待改正
+    Array.prototype.deleteRepeat=function(){
+        var self=this;
+        var aa=this.concat().sort();
+        aa.sort(function(a,b){
+            if(a===b){
+                var n = self.indexOf(a);
+                self.splice(n,1);
+            }
+        });
+        return self;
+    }
+    var dataArray=[1,2,3,1,2,3,22,11,"dd","cc","dd","cc"];
+    console.log(dataArray.deleteRepeat());
+</script>
+</html>
