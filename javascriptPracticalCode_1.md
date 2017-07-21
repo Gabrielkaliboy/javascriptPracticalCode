@@ -284,7 +284,7 @@ console.log(dataArray.deleteRepeat1());
 console.log(dataArray.deleteRepeat2());
 ```
 #### 10.数组去重（算法有问题，待改正）
-#### 禁止表单按回车触发提交事件
+#### 11.禁止表单按回车触发提交事件
 在HTML页里面由于使用了form，常常需要禁用enter提交表单。因为内容页或者母版页自身有如果有type="submit"的button,当textbox聚焦时，按下enter都会触发表单的默认提交（不论是IE还是firefox），于是需要在onkeydown中监听用户的按键。实际测试，IE8中导致表单提交的不确定因素太多，点击表单的table中的td都会触发表单提交，而firefox则不会；于是在ie和ff中禁用表单提交需要不同的思路。
 
 - 对于IE:
@@ -319,4 +319,51 @@ document.onkeydown = function(event) {
        }    
    }    
 };  
+```
+
+#### 12. 获取一段链接里面的主机地址等等
+解析URL各部分的通用方法。下面代码来自[James的博客](https://j11y.io/javascript/parsing-urls-with-the-dom/)。
+```javascript
+function parseURL(url) {
+    var a =  document.createElement('a');
+    a.href = url;
+    return {
+        source: url,
+        protocol: a.protocol.replace(':',''),
+        host: a.hostname,
+        port: a.port,
+        query: a.search,
+        params: (function(){
+            var ret = {},
+                seg = a.search.replace(/^?/,'').split('&'),
+                len = seg.length, i = 0, s;
+            for (;i<len;i++) {
+                if (!seg[i]) { continue; }
+                s = seg[i].split('=');
+                ret[s[0]] = s[1];
+            }
+            return ret;
+        })(),
+        file: (a.pathname.match(//([^/?#]+)$/i) || [,''])[1],
+        hash: a.hash.replace('#',''),
+        path: a.pathname.replace(/^([^/])/,'/$1'),
+        relative: (a.href.match(/tps?://[^/]+(.+)/) || [,''])[1],
+        segments: a.pathname.replace(/^//,'').split('/')
+    };
+}
+```
+使用方法
+```javascript
+var myURL = parseURL('http://abc.com:8080/dir/index.html?id=255&m=hello#top');
+ 
+myURL.file;     // = 'index.html'
+myURL.hash;     // = 'top'
+myURL.host;     // = 'abc.com'
+myURL.query;    // = '?id=255&m=hello'
+myURL.params;   // = Object = { id: 255, m: hello }
+myURL.path;     // = '/dir/index.html'
+myURL.segments; // = Array = ['dir', 'index.html']
+myURL.port;     // = '8080'
+myURL.protocol; // = 'http'
+myURL.source;   // = 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
 ```
