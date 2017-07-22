@@ -367,3 +367,17 @@ myURL.port;     // = '8080'
 myURL.protocol; // = 'http'
 myURL.source;   // = 'http://abc.com:8080/dir/index.html?id=255&m=hello#top'
 ```
+#### 13.生成随机字符串
+- 利用Math.random生成一个随机数。
+
+- toString(36):将生成的随机数转换为对应的基数对应的字符串。如果不指定默认就是10进制。指定36就可以取到0-9，a-z
+
+- substr这个字符串里面的函数，可以指定两个参数，第一个就是开始截取的脚标位置，第二个就是截取多长，如果不指定就一直截取到最后
+
+```javascript
+function generateRandomAlphaNum(len) {
+    var rdmString = "";
+    for (; rdmString.length < len; rdmString += Math.random().toString(36).substr(2));
+    return rdmString.substr(0, len);
+}
+```
