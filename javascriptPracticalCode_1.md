@@ -381,3 +381,24 @@ function generateRandomAlphaNum(len) {
     return rdmString.substr(0, len);
 }
 ```
+
+#### 判断IE浏览器，然后执行相应动作
+```javascript
+document.onload = function()
+{
+ if(navigator.appName == 'Microsoft Internet Explorer')
+ {
+   document.getElementById('someElement').style.width = '200px';
+ }
+}
+
+<div id='someElement' style='width:10px'>Some element</div>
+```
+
+```javascript
+<!--[if IE]>
+    <script type="text/javascript">
+        document.getElementById('elementsId').style.width = '250px';
+    </script>
+<![endif]-->
+```
