@@ -382,7 +382,7 @@ function generateRandomAlphaNum(len) {
 }
 ```
 
-#### 判断IE浏览器，然后执行相应动作
+#### 14.判断IE浏览器，然后执行相应动作
 ```javascript
 document.onload = function()
 {
@@ -401,4 +401,59 @@ document.onload = function()
         document.getElementById('elementsId').style.width = '250px';
     </script>
 <![endif]-->
+```
+
+
+#### 15.JS代码判断IE6,IE7,IE8,IE9的函数代码
+
+第一种：
+```javascript
+    if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE6.0") {
+        alert("IE 6.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE7.0") {
+        alert("IE 7.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0") {
+        alert("IE 8.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE9.0") {
+        alert("IE 9.0");
+    }
+```
+
+第二种：
+```javascript
+    var browser = navigator.appName
+    var b_version = navigator.appVersion
+    var version = b_version.split(";");sss
+    var trim_Version = version[1].replace(/[ ]/g, "");
+    if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0") {
+        alert("IE 6.0");
+    }
+    else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE7.0") {
+        alert("IE 7.0"); window.location.href = "http://xxxx.com";
+    }
+    else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE8.0") {
+        alert("IE 8.0");
+    }
+    else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE9.0") {
+        alert("IE 9.0");
+    }
+```
+
+第三种
+```javascript
+    if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i) == "7.") {
+        alert("IE 7.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.") {
+        alert("IE 8.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.") {
+        alert("IE 9.0");
+    }
+    else if (navigator.appName == "Microsoft Internet Explorer") {
+        alert("IE 6.0");
+    }
 ```
