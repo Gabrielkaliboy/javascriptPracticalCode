@@ -457,3 +457,13 @@ document.onload = function()
         alert("IE 6.0");
     }
 ```
+
+第四种 用于检测IE6、7、8、9
+
+```javascript
+if(-[1,]){
+     alert("这不是IE浏览器！");
+}else{
+     alert("这是IE浏览器！");
+}
+```
